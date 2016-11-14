@@ -28,12 +28,12 @@ app.use(session({
 global.dbHelper = require('./common/dbHelper')
 
 // 设置静态资源路径
-app.set(express.static(path.join(__dirname, '/public')))
+//app.set(express.static(path.join(__dirname, 'public')))
 
-//app.set('./public/css', express.static(__dirname + '/public/css'))
-//app.set('./public/js', express.static(__dirname + '/public/js'))
-//app.set('./public/images', express.static(__dirname + '/public/images'))
-//app.set('./public/fonts', express.static(__dirname + '/public/fonts'))
+//app.set('/css', express.static(path.join(__dirname + '/css')))
+//app.set('/js', express.static(path.join(__dirname + '/js')))
+//app.set('/images', express.static(__dirname + '/public/images'))
+//app.set('/fonts', express.static(__dirname + '/public/fonts'))
 
 
 // 使用engine函数注册模板引擎并指定处理后缀名称为html的文件
@@ -42,8 +42,9 @@ app.engine('.html', ejs.__express)
 
 // 设定视图存放的目录
 app.set('views', path.join(__dirname, 'views'))
-// 指定本地静态资源的访问路径
-app.set(express.static(path.join(__dirname, 'public')))
+// 指定本地静态资源的访问路径,app.use而不是app.set
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 // 调用中间件
 app.use(bodyParser.json())
