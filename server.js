@@ -27,15 +27,6 @@ app.use(session({
 // 使用global定义全局变量，可在任何模块内调用
 global.dbHelper = require('./common/dbHelper')
 
-// 设置静态资源路径
-//app.set(express.static(path.join(__dirname, 'public')))
-
-//app.set('/css', express.static(path.join(__dirname + '/css')))
-//app.set('/js', express.static(path.join(__dirname + '/js')))
-//app.set('/images', express.static(__dirname + '/public/images'))
-//app.set('/fonts', express.static(__dirname + '/public/fonts'))
-
-
 // 使用engine函数注册模板引擎并指定处理后缀名称为html的文件
 app.set('view engine', 'html')
 app.engine('.html', ejs.__express)

@@ -8,7 +8,7 @@
                                      initial-scale=1.0, 
                                      maximum-scale=1.0, 
                                      user-scalable=no"> -->
-    <title>注册页面</title>
+    <title>登陆页面</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
@@ -27,7 +27,7 @@
     <div id="register-area" class="col-md-6 col-center-block">
     	<%- message %>
         <div class="well bs-component col-md-8">
-            <label>用户注册</label>
+            <label>用户登陆</label>
             <form id="register-form" class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
@@ -43,15 +43,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="confirm-pw" class="col-md-4 control-label" style="text-align: left;">确认密码</label>
-                        <div class="col-md-12">
-                            <input type="password" name="confirm-pw" placeholder="确认密码" class="form-control" id="confirm-pw">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <div class="col-md-12 col-md-offset-2">
-                            <button type="submit" name="register" id="btn-register" class="btn btn-default btn-primary btn-successs col-md-6" onclick="register()">注册</button>
-                            <button type="button" id="btn-login" class="btn btn-primary col-md-6">登陆</button>
+                            <button type="submit" name="register" id="btn-register" class="btn btn-default btn-primary btn-successs col-md-6">登陆</button>
+                            <button type="button" id="btn-login" class="btn btn-primary col-md-6">注册</button>
                         </div>
                     </div>
                 </fieldset>
@@ -66,27 +60,6 @@
     $(document).ready(function() {
     	// 初始化md组件
         $.material.init()
-
-        // 定义注册函数
-        function register() {
-        	//序列化表单值
-        	var data = $('form').serialize()
-
-        	$.ajax({
-        		url: '/register',
-        		type: 'POST',
-        		data: data,
-        		success: function(data, status) {
-        			if(status === 'success') {
-        				location.href = 'login' // 注册成功时跳转登陆页面
-        			}
-        		},
-        		error: function(res, err) {
-                    console.log(err)
-        			location.href = 'register'
-        		}
-        	})
-        }
     })
     </script>
 
