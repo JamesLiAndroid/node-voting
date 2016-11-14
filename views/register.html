@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, 
+                                     initial-scale=1.0, 
+                                     maximum-scale=1.0, 
+                                     user-scalable=no"> -->
+    <title>注册页面</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/ripples.css">
+    <style type="text/css">
+    .col-center-block {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="register-area" class="col-md-6 col-center-block">
+    	<%- message %>
+        <div class="well bs-component col-md-8">
+            <label>用户注册</label>
+            <form id="register-form" class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="username" class="col-md-2 control-label title" style="text-align: left;">用户名</label>
+                        <div class="col-md-12">
+                            <input type="text" name="username" placeholder="用户名" class="form-control" id="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-md-2 control-label" style="text-align: left;">密码</label>
+                        <div class="col-md-12">
+                            <input type="password" name="password" placeholder="密码" class="form-control" id="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-pw" class="col-md-4 control-label" style="text-align: left;">确认密码</label>
+                        <div class="col-md-12">
+                            <input type="password" name="confirm-pw" placeholder="确认密码" class="form-control" id="confirm-pw">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-md-offset-2">
+                            <button type="submit" name="register" id="btn-register" class="btn btn-default btn-primary btn-successs col-md-6" onclick="register()">登陆</button>
+                            <button type="button" id="btn-login" class="btn btn-primary col-md-6">注册</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="../public/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="../public/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../public/js/material.js"></script>
+    <script type="text/javascript" src="../public/js/ripples.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	// 初始化md组件
+        $.material.init()
+
+        // 定义注册函数
+        function register() {
+        	//序列化表单值
+        	var data = $('form').serialize()
+
+        	$.ajax({
+        		url: '/register',
+        		type: 'POST',
+        		data: data,
+        		success: function(data, status) {
+        			if(status === 'success') {
+        				location.href = 'register'
+        			}
+        		},
+        		error: function(res, err) {
+        			location.href = 'register'
+        		}
+        	})
+        }
+    })
+    </script>
+
+    <script type="text/javascript">
+    	
+    </script>
+</body>
+
+</html>
