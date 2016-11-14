@@ -1,0 +1,24 @@
+{
+  "name": "jamesli",
+  "version": "1.0.0",
+  "description": "node技术栈实现投票系统",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesLiAndroid/node-voting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesLiAndroid/node-voting/issues"
+  },
+  "homepage": "https://github.com/JamesLiAndroid/node-voting#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.7"
+  }
+}
