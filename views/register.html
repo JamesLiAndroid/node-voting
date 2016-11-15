@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12 col-md-offset-2">
-                            <button type="submit" name="register" id="btn-register" class="btn btn-default btn-primary btn-successs col-md-6" onclick="register()">注册</button>
+                            <button type="submit" name="register" id="btn-register" class="btn btn-default btn-primary btn-successs col-md-6">注册</button>
                             <button type="button" id="btn-login" class="btn btn-primary col-md-6">登陆</button>
                         </div>
                     </div>
@@ -71,28 +71,42 @@
         function register() {
         	//序列化表单值
         	var data = $('form').serialize()
-
-        	$.ajax({
-        		url: '/register',
-        		type: 'POST',
-        		data: data,
-        		success: function(data, status) {
-        			if(status === 'success') {
-        				location.href = 'login' // 注册成功时跳转登陆页面
-        			}
-        		},
-        		error: function(res, err) {
-                    console.log(err)
-        			location.href = 'register'
-        		}
+        	$.post('/register', data, function(result) {
+        		alert(result)
+        		location.href = 'login' // 注册成功时跳转登陆页面
         	})
+ //        	$.ajax({
+ //        		url: 'http://requestb.in/112rrr41',
+ //        		type: 'POST',
+ //        		data: data,
+ //        		success: function(data, status) {
+ //        			console.log(data + '::' + status)
+ //        			if(status === 'success') {
+ //        				alert('注册成功！' + data+'  sss  '+status)
+ //        				console.log('注册成功！')
+ //        				location.href = 'login' // 注册成功时跳转登陆页面
+ //        			} else {
+ //        				alert('aaa'+status+'bbbb'+data)
+ //        				console.log('aaa'+status+'bbbb'+data)
+ //        			}
+ //        		},
+ //        		error: function(jqXHR, textStatus, errorThrown) {
+ //        			// 通常情况下textStatus和errorThown只有其中一个有值 
+ //        			alert(jqXHR.readyState + jqXHR.status + jqXHR.responseText);  
+ // // alert(jqXHR.status); // alert(jqXHR.readyState); // alert(textStatus); // /*弹出jqXHR对象的信息*/ // alert(jqXHR.responseText); // alert(jqXHR.status); // alert(jqXHR.readyState); // alert(jqXHR.statusText); // /*弹出其他两个参数的信息*/ // alert(textStatus); // alert(errorThrown);
+ //        			alert('注册不成功！'+textStatus+': ddddddddddddddddddddddddddddd :'+errorThrown)
+ //                    console.log(err)
+ //        			//window.location.href = 'register'
+ //        		}
+ //        	})
         }
+
+        $('#btn-register').on('click', function() {
+        	register()
+        })
     })
     </script>
 
-    <script type="text/javascript">
-    	
-    </script>
 </body>
 
 </html>

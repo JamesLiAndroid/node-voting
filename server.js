@@ -10,7 +10,7 @@ var session = require('express-session')
 // 初始化变量
 var app = express()
 
-// 连接数据库
+// 连接数据库，执行node server.js的时候，先执行database文件夹中的start.sh脚本启动数据库
 mongoose.connect("mongodb://127.0.0.1:27017/simple-store")
 
 // express-session deprecated undefined resave option; provide resave option server.js:16:9
@@ -50,6 +50,20 @@ app.use(function(req, res, next) {
   if(err) res.locals.message = '<div class="alert alert-danger" style="margin-bottom: 20px;color: red;">' + err + '</div>'
   next()
 })
+
+// 跨域请求的问题解决，allow custom header and CORS
+app.all('*',function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+
+  if (req.method == 'OPTIONS') {
+    res.send(200); /让options请求快速返回/
+  } else {
+    next();
+  }
+});
+
 
 // 将app传入路由
 require('./routes')(app)
