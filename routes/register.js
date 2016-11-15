@@ -16,6 +16,7 @@ module.exports = function (app){
     var User = global.dbHelper.getModel('user')
     var uname = req.body.username
 
+    console.log(User)
     User.findOne({
       name: uname
     }, function (error, doc) {
@@ -36,7 +37,7 @@ module.exports = function (app){
             console.log('创建成功！'  +doc)
             req.session.error = '用户名创建成功！'
             //res.sendStatus(200)
-            res.set('Content-Type', 'application/json')
+            //res.set('Content-Type', 'application/json')
             res.status(200).send('{status:ok}')
           }
         })

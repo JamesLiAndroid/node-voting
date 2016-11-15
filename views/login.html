@@ -24,11 +24,11 @@
 </head>
 
 <body>
-    <div id="register-area" class="col-md-6 col-center-block">
+    <div id="login-area" class="col-md-6 col-center-block">
     	<%- message %>
         <div class="well bs-component col-md-8">
             <label>用户登陆</label>
-            <form id="register-form" class="form-horizontal">
+            <form id="login-form" class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
                         <label for="username" class="col-md-2 control-label title" style="text-align: left;">用户名</label>
@@ -44,8 +44,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12 col-md-offset-2">
-                            <button type="submit" name="register" id="btn-register" class="btn btn-default btn-primary btn-successs col-md-6">登陆</button>
-                            <button type="button" id="btn-login" class="btn btn-primary col-md-6">注册</button>
+                            <button type="submit" name="login" id="btn-login" class="btn btn-default btn-primary btn-successs col-md-6">登陆</button>
+                            <button type="button" name="register" id="btn-register" class="btn btn-primary col-md-6">注册</button>
                         </div>
                     </div>
                 </fieldset>
@@ -60,11 +60,39 @@
     $(document).ready(function() {
     	// 初始化md组件
         $.material.init()
-    })
-    </script>
 
-    <script type="text/javascript">
-    	
+        function login() {
+            var data = $('form').serialize()
+            console.log(data)
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                data: data,
+                success: function(data, status) {
+                    if(status == 'success') {
+                        alert('登陆成功！')
+                        console.log('登陆成功！')
+                        location.href = '/home'
+                    } else {
+                        console.log('存在问题！')
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // 通常情况下textStatus和errorThown只有其中一个有值 
+                    alert(jqXHR.readyState + '   ' + jqXHR.status + '   ' +jqXHR.responseText);  
+                    alert('登陆不成功！'+textStatus+': ddddddddddddddddddddddddddddd :'+errorThrown)
+                    console.log(err)
+                    window.location.href = '/register'
+                }
+            })
+        }
+
+        $('#btn-login').on('click', function(e) {
+            e.preventDefault()
+            login()
+        })
+
+    })
     </script>
 </body>
 
