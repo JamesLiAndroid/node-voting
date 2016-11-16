@@ -13,6 +13,44 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
     <link rel="stylesheet" type="text/css" href="css/ripples.css">
+    <!-- <style type="text/css">
+    /* 设置dialog居中显示 */
+    .modal-dialog {
+        position: absolute;
+        top: 50% !important;
+        transform: translate(0, -50%) !important;
+        -ms-transform: translate(0, -50%) !important;
+        -webkit-transform: translate(0, -50%) !important;
+        margin: auto 5%;
+        width: 90%;
+        height: 80%;
+    }
+    
+    .modal-content {
+        min-height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    
+    .modal-body {
+        position: absolute;
+        top: 45px; // height of header
+        bottom: 45px; // height of footer
+        left: 0;
+        right: 0;
+        overflow-y: auto;
+    }
+    
+    .modal-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    </style> -->
 </head>
 
 <body>
@@ -28,46 +66,77 @@
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="javascript:void(0)">添加商品</a></li>
+                    <li><a data-toggle="modal" data-target="#complete-dialog" href="javascript:void(0)">添加商品</a></li>
                     <li><a href="javascript:void(0)">购物车</a></li>
                     <li><a href="javascript:void(0)">退出登陆</a></li>
                 </ul>
             </div>
-
         </div>
     </div>
-	
-	<ul class="spys">
-		<%for(var i in Commoditys) { if(!Commoditys[i].name) continue;  %>
-		<li class="sps li">
-			<div>
-				<img width="80" height="100" src="images/<%=Commoditys[i].imgSrc %>">
-			</div>
-
-			<div>
-				<a><%=Commoditys[i].name%></a>
-				<strong style="color: red;">￥<%=Commoditys[i].price%></strong>
-			</div>
-
-			<div>
-				<a class="btn btn-successs" href="" style="width: 7.5em">加入购物车</a>
-			</div>
-		</li>
-		<%}%>
-
-	</ul>
-
-
-    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/material.js"></script>
-    <script type="text/javascript" src="js/ripples.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        // 初始化md组件
-        $.material.init()
-    })
-    </script>
+        <div id="complete-dialog" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加商品</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="product-area" class="col-md-12">
+                            <div class="well col-md-12">
+                                <form id="login-form" class="form-horizontal">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="name" class="col-md-2 control-label title" style="text-align: left;">商品名称</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="name" placeholder="商品名称" class="form-control" id="username">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="price" class="col-md-2 control-label" style="text-align: left;">价格</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="price" placeholder="价格" class="form-control" id="password">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="confirm" name="add-product" type="submit" class="btn btn-primary" data-dismiss="modal">添加商品</button>
+                        <button id="cancel" name="candel" type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="spys">
+            <%for(var i in Commoditys) { if(!Commoditys[i].name) continue;  %>
+                <li class="sps li">
+                    <div>
+                        <img width="80" height="100" src="images/<%=Commoditys[i].imgSrc %>">
+                    </div>
+                    <div>
+                        <a>
+                            <%=Commoditys[i].name%>
+                        </a>
+                        <strong style="color: red;">￥<%=Commoditys[i].price%></strong>
+                    </div>
+                    <div>
+                        <a class="btn btn-successs" href="" style="width: 7.5em">加入购物车</a>
+                    </div>
+                </li>
+                <%}%>
+        </ul>
+        <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/material.js"></script>
+        <script type="text/javascript" src="js/ripples.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            // 初始化md组件
+            $.material.init()
+        })
+        </script>
 </body>
 
 </html>
