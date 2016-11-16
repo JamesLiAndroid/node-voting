@@ -66,77 +66,155 @@
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-toggle="modal" data-target="#complete-dialog" href="javascript:void(0)">添加商品</a></li>
-                    <li><a href="javascript:void(0)">购物车</a></li>
+                    <li><a data-toggle="modal" data-target="#addcommodity-dialog" href="javascript:void(0)">添加商品</a></li>
+                    <li><a data-toggle="modal" data-target="#cartset-dialog" href="javascript:void(0)">购物车</a></li>
                     <li><a href="javascript:void(0)">退出登陆</a></li>
                 </ul>
             </div>
         </div>
     </div>
-        <div id="complete-dialog" class="modal fade" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">添加商品</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="product-area" class="col-md-12">
-                            <div class="well col-md-12">
-                                <form id="login-form" class="form-horizontal">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label for="name" class="col-md-2 control-label title" style="text-align: left;">商品名称</label>
-                                            <div class="col-md-12">
-                                                <input type="text" name="name" placeholder="商品名称" class="form-control" id="username">
-                                            </div>
+    <div id="addcommodity-dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加商品</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="product-area" class="col-md-12">
+                        <div class="well col-md-12">
+                            <form id="login-form" class="form-horizontal">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="name" class="col-md-2 control-label title" style="text-align: left;">商品名称</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="name" placeholder="商品名称" class="form-control" id="username">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="price" class="col-md-2 control-label" style="text-align: left;">价格</label>
-                                            <div class="col-md-12">
-                                                <input type="text" name="price" placeholder="价格" class="form-control" id="password">
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price" class="col-md-2 control-label" style="text-align: left;">价格</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="price" placeholder="价格" class="form-control" id="password">
                                         </div>
-                                    </fieldset>
-                                </form>
-                            </div>
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button id="confirm" name="add-product" type="submit" class="btn btn-primary" data-dismiss="modal">添加商品</button>
-                        <button id="cancel" name="candel" type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm" name="add-product" type="submit" class="btn btn-primary btn-raised" data-dismiss="modal">添加商品</button>
+                    <button id="cancel" name="candel" type="button" class="btn btn-primary btn-raised" data-dismiss="modal">取消</button>
                 </div>
             </div>
         </div>
-        <ul class="spys">
-            <%for(var i in Commoditys) { if(!Commoditys[i].name) continue;  %>
-                <li class="sps li">
-                    <div>
-                        <img width="80" height="100" src="images/<%=Commoditys[i].imgSrc %>">
-                    </div>
-                    <div>
-                        <a>
-                            <%=Commoditys[i].name%>
-                        </a>
-                        <strong style="color: red;">￥<%=Commoditys[i].price%></strong>
-                    </div>
-                    <div>
-                        <a class="btn btn-successs" href="" style="width: 7.5em">加入购物车</a>
-                    </div>
-                </li>
-                <%}%>
-        </ul>
-        <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/material.js"></script>
-        <script type="text/javascript" src="js/ripples.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            // 初始化md组件
-            $.material.init()
+    </div>
+
+     <div id="cartset-dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">购物车</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                    	<%for(var i in carts) {if(!carts[i].cId) continue;%>
+                    	<li>
+                    		<div class="li-checkbox">
+                    			<input type="checkbox" name="chkItem" data-id="<%=carts[i]._id%>" data-index="<%=i%>" data-price="<%=carts[i].cPrice%>" class="li-checkbox input">
+                    		</div>
+
+                    		<div class="li-img">
+                    			<a>
+                    				<img src="/images/<%=carts[i].cImgSrc%>" alt="" class="li-img a img">
+                    			</a>
+                    		</div>
+
+                    		<div class="li-content">
+                    			<a><%=carts[i].cName%></a>
+                    		</div>
+
+                    		<div class="li-price">
+                    			<span><%=carts[i].cPrice%></span>
+                    		</div>
+
+                    		<div class="li-quantity">
+                    			<a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs">+</a>
+                    			<input type="text" id="Q<%=i%>" style="width: 2.5em;" value="<%carts[i].cQuantity%>">
+                    			<a href="javascript:void(0)" data-type="subtr" class="btn btn-default btn-xs">-</a>
+                    		</div>
+
+                    		<div class="li-del">
+                    			<a href="/delFromCart/<%=carts[i]._id%>" class="btn btn-default btn-xs">删除</a>
+                    		</div>
+                    	</li>
+                    	<%}%>
+                    </ul>
+
+                   	<span>总计：￥<%var price =0; for(var i in carts) {if(!carts[i].cId) continue; price += carts[i].cPrice;}%></span>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm" name="pay" type="submit" class="btn btn-primary btn-raised" data-dismiss="modal">结算</button>
+                    <button id="cancel" name="candel" type="button" class="btn btn-primary btn-raised" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="spys">
+        <%for(var i in Commoditys) { if(!Commoditys[i].name) continue;%>
+            <li class="sps li">
+                <div>
+                    <img width="80" height="100" src="images/<%=Commoditys[i].imgSrc %>">
+                </div>
+                <br>
+                <div>
+                    <a>
+                        <%=Commoditys[i].name%>
+                    </a>
+                    <br>
+                    <strong style="color: red;">￥<%=Commoditys[i].price%></strong>
+                </div>
+                <div>
+                    <a class="btn btn-successs btn-raised" href="/addToCart/<%=Commoditys[i]._id%>" style="width: 7.5em;text-align: left;">加入购物车</a>
+                </div>
+            </li>
+            <%}%>
+    </ul>
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/material.js"></script>
+    <script type="text/javascript" src="js/ripples.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // 初始化md组件
+        $.material.init()
+
+        function addcommodity() {
+        	var data = $('form').serialize() + '&imgSrc=' + 'xmsz-'+Math.floor(Math.random() * 5 + 1)+'.jpg'
+        	$.ajax({
+        		url: '/addcommodity',
+        		type: 'POST',
+        		data: data,
+        		success: function(data, status) {
+        			if(status == 'success') {
+        				alert('添加成功')
+        			} else {
+        				alert('.....')
+        			}
+        		},
+        		error: function(data, error) {
+        			alert('error!')
+        		}
+        	})
+        }
+
+        $('#confirm').on('click', function(e) {
+            e.preventDefault()
+            addcommodity()
         })
-        </script>
+    })
+    </script>
 </body>
 
 </html>
