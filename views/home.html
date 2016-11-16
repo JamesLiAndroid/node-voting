@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, 
+                                     initial-scale=1.0, 
+                                     maximum-scale=1.0, 
+                                     user-scalable=no"> -->
+    <title>商品页面</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.css">
+</head>
+
+<body>
+    <div class="navbar navbar-info">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">商品列表</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="javascript:void(0)">添加商品</a></li>
+                    <li><a href="javascript:void(0)">购物车</a></li>
+                    <li><a href="javascript:void(0)">退出登陆</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+	
+	<ul class="spys">
+		<%for(var i in Commoditys) { if(!Commoditys[i].name) continue;  %>
+		<li class="sps li">
+			<div>
+				<img width="80" height="100" src="images/<%=Commoditys[i].imgSrc %>">
+			</div>
+
+			<div>
+				<a><%=Commoditys[i].name%></a>
+				<strong style="color: red;">￥<%=Commoditys[i].price%></strong>
+			</div>
+
+			<div>
+				<a class="btn btn-successs" href="" style="width: 7.5em">加入购物车</a>
+			</div>
+		</li>
+		<%}%>
+
+	</ul>
+
+
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/material.js"></script>
+    <script type="text/javascript" src="js/ripples.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // 初始化md组件
+        $.material.init()
+    })
+    </script>
+</body>
+
+</html>
