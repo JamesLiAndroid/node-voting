@@ -148,6 +148,8 @@
         		success: function(data, status) {
         			if(status == 'success') {
         				alert('添加成功')
+        				// 添加成功之后重新加载
+        				window.location.reload(true)
         			} else {
         				alert('.....')
         			}

@@ -15,7 +15,7 @@ module.exports = {
     cName: {type: String},
     cPrice: {type: String},
     cImgSrc: {type: String},
-    cQuentity: {type: String},
+    cQuentity: {type: Number},
     cStatus: {type: Boolean, default: false}
   }
 }

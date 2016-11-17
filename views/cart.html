@@ -15,7 +15,6 @@
     <link rel="stylesheet" type="text/css" href="css/ripples.css">
     <style type="text/css">
     /* 设置dialog居中显示 */
-    
     .modal-dialog {
         position: absolute;
         top: 50% !important;
@@ -104,8 +103,8 @@
                     </div>
                     <div class="li-quantity">
                         <a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs">+</a>
-                        <input type="text" id="Q<%=i%>" style="width: 2.5em;" value="<%carts[i].cQuantity%>">
-                        <a href="javascript:void(0)" data-type="subtr" class="btn btn-default btn-xs">-</a>
+                        <input type="text" id="Q<%=i%>" style="width: 2.5em;" value="<%=carts[i].cQuantity%>">
+                        <a href="javascript:void(0)" data-type="substr" class="btn btn-default btn-xs">-</a>
                     </div>
                     <div class="li-del">
                         <a href="/delFromCart/<%=carts[i]._id%>" class="btn btn-default btn-xs">删除</a>
@@ -131,7 +130,39 @@
 
 
         // 设置全选
-        $
+        $('#check-all').click(function(event) {
+            /* Act on the event */
+            var self = $(this)
+            $('input[name="chkItem"]').each(function(index, el) {
+                $(this).prop("checked", self.is(":checked"))
+            });
+        });
+
+        // 设置单选
+        $('input[name="chkItem"]:checkbox').click(function(event) {
+            /* Act on the event */
+            var isCheck = $('input[name="chkItem"]:not(:checked)').length ? false : true
+            $('#check-all').prop("checked", isCheck)
+        });
+
+        // 添加加减
+        $('.li-quantity a').click(function(event) {
+            var self = $(this)
+            var type = self.attr('data-type'),
+                num = parseFloat(self.siblings('input').val())
+
+            if(type == 'add') {
+                num += 1
+            } else if(type == 'substr'){
+                if(num > 1) {
+                    num -= 1
+                } else {
+                    return false
+                }
+            }
+
+            self.siblings('input').val(num)
+        });
     })
     </script>
 </body>

@@ -42,13 +42,19 @@ module.exports = function(app) {
       }
 
       if(doc) {
+        var cQuantity
+        if(!doc.cQuantity) {
+          cQuantity = 1
+        } else {
+          cQuantity = doc.cQuantity
+        }
         console.log('查询商品的数据为：'+doc)
         Carts.update({
           'uId': req.session.user._id,
           'cId': productId
         }, {
           $set: {
-            cQuantity: doc.cQuantity + 1
+            cQuantity: cQuantity + 1
           }
         }, function(error) {
           if(error) {
@@ -79,7 +85,7 @@ module.exports = function(app) {
           }
           if(doc){
             console.log('插入购物车成功！')
-            res.session.error = '插入购物车成功'
+            req.session.error = '插入购物车成功'
             res.redirect('/home')
           } else {
             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
