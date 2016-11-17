@@ -67,7 +67,7 @@
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a data-toggle="modal" data-target="#addcommodity-dialog" href="javascript:void(0)">添加商品</a></li>
-                    <li><a data-toggle="modal" data-target="#cartset-dialog" href="javascript:void(0)">购物车</a></li>
+                    <li><a href="/cart">购物车</a></li>
                     <li><a href="javascript:void(0)">退出登陆</a></li>
                 </ul>
             </div>
@@ -110,57 +110,6 @@
         </div>
     </div>
 
-     <div id="cartset-dialog" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">购物车</h4>
-                </div>
-                <div class="modal-body">
-                    <ul>
-                    	<%for(var i in carts) {if(!carts[i].cId) continue;%>
-                    	<li>
-                    		<div class="li-checkbox">
-                    			<input type="checkbox" name="chkItem" data-id="<%=carts[i]._id%>" data-index="<%=i%>" data-price="<%=carts[i].cPrice%>" class="li-checkbox input">
-                    		</div>
-
-                    		<div class="li-img">
-                    			<a>
-                    				<img src="/images/<%=carts[i].cImgSrc%>" alt="" class="li-img a img">
-                    			</a>
-                    		</div>
-
-                    		<div class="li-content">
-                    			<a><%=carts[i].cName%></a>
-                    		</div>
-
-                    		<div class="li-price">
-                    			<span><%=carts[i].cPrice%></span>
-                    		</div>
-
-                    		<div class="li-quantity">
-                    			<a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs">+</a>
-                    			<input type="text" id="Q<%=i%>" style="width: 2.5em;" value="<%carts[i].cQuantity%>">
-                    			<a href="javascript:void(0)" data-type="subtr" class="btn btn-default btn-xs">-</a>
-                    		</div>
-
-                    		<div class="li-del">
-                    			<a href="/delFromCart/<%=carts[i]._id%>" class="btn btn-default btn-xs">删除</a>
-                    		</div>
-                    	</li>
-                    	<%}%>
-                    </ul>
-
-                   	<span>总计：￥<%var price =0; for(var i in carts) {if(!carts[i].cId) continue; price += carts[i].cPrice;}%></span>
-                </div>
-                <div class="modal-footer">
-                    <button id="confirm" name="pay" type="submit" class="btn btn-primary btn-raised" data-dismiss="modal">结算</button>
-                    <button id="cancel" name="candel" type="button" class="btn btn-primary btn-raised" data-dismiss="modal">取消</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <ul class="spys">
         <%for(var i in Commoditys) { if(!Commoditys[i].name) continue;%>
             <li class="sps li">

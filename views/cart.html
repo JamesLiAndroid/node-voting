@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, 
+                                     initial-scale=1.0, 
+                                     maximum-scale=1.0, 
+                                     user-scalable=no"> -->
+    <title>购物车页面</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.css">
+    <style type="text/css">
+    /* 设置dialog居中显示 */
+    
+    .modal-dialog {
+        position: absolute;
+        top: 50% !important;
+        transform: translate(0, -50%) !important;
+        -ms-transform: translate(0, -50%) !important;
+        -webkit-transform: translate(0, -50%) !important;
+        margin: auto 5%;
+        width: 90%;
+        height: 80%;
+    }
+    
+    .modal-content {
+        min-height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    
+    .modal-body {
+        position: absolute;
+        top: 45px; // height of header
+        bottom: 45px; // height of footer
+        left: 0;
+        right: 0;
+        overflow-y: auto;
+    }
+    
+    .modal-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    li.cart-item {
+        float: left;
+    }
+
+    a img {
+        width: 3em;
+        height: 3em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-success">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">购物车列表</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" onclick="javascript:history.go(-1)">返回</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="checkbox" name="chkItem" id="check-all" class="li-checkbox input">全选
+        <ul>
+            <%for(var i in carts) {if(!carts[i].cId) continue;%>
+                <li class="cart-item">
+                    <div class="li-checkbox">
+                        <input type="checkbox" name="chkItem" data-id="<%=carts[i]._id%>" data-index="<%=i%>" data-price="<%=carts[i].cPrice%>" class="li-checkbox input">
+                    </div>
+                    <div class="li-img">
+                        <a>
+                          <img src="/images/<%=carts[i].cImgSrc%>" alt="" class="li-img a img">
+                        </a>
+                    </div>
+                    <div class="li-content">
+                        <a>
+                            <%=carts[i].cName%>
+                        </a>
+                    </div>
+                    <div class="li-price">
+                        <span><%=carts[i].cPrice%></span>
+                    </div>
+                    <div class="li-quantity">
+                        <a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs">+</a>
+                        <input type="text" id="Q<%=i%>" style="width: 2.5em;" value="<%carts[i].cQuantity%>">
+                        <a href="javascript:void(0)" data-type="subtr" class="btn btn-default btn-xs">-</a>
+                    </div>
+                    <div class="li-del">
+                        <a href="/delFromCart/<%=carts[i]._id%>" class="btn btn-default btn-xs">删除</a>
+                    </div>
+                </li>
+                <%}%>
+        </ul>
+        <span>总计：￥<%var price =0; for(var i in carts) {if(!carts[i].cId) continue; price += carts[i].cPrice;}%></span>
+    </div>
+    <div>
+        <button id="confirm" name="pay" type="submit" class="btn btn-primary btn-raised" data-dismiss="modal">结算</button>
+        <button id="cancel" name="candel" type="button" class="btn btn-primary btn-raised" data-dismiss="modal">取消</button>
+    </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/material.js"></script>
+    <script type="text/javascript" src="js/ripples.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // 初始化md组件
+        $.material.init()
+
+
+        // 设置全选
+        $
+    })
+    </script>
+</body>
+
+</html>
