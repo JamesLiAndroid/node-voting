@@ -38,7 +38,7 @@ module.exports = function(app) {
       // 否则重新向购物车添加
       if(error) {
         req.session.error = '查询商品不成功'
-        req.sendStatus(404)
+        res.sendStatus(404)
       }
 
       if(doc) {
