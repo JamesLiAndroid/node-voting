@@ -98,4 +98,30 @@ module.exports = function(app) {
     })
 
   })
+
+  app.post('/cartall', function(req, res) {
+    console.log('req。body`' + req.body.toString())
+    var Carts = global.dbHelper.getModel('cart')
+    Carts.update({
+      '_id': req.body.cId
+    }, {
+      $set: {
+        cQuantity: req.body.cnum,
+        cStatus: true
+      }
+    }, function(error,doc) {
+      if(error) {
+        req.session.error = '购物车结算失败！'
+        res.sendStatus(403)
+        return
+      }
+
+      console.log('更新购物车数据：'+doc)
+      if(doc) {
+        console.log('结算成功')
+        req.session.error = '数据更新成功！'
+        res.sendStatus(200)
+      }
+    })
+  })
 }

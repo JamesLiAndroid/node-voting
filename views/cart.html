@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/ripples.css">
     <style type="text/css">
     /* 设置dialog居中显示 */
+    
     .modal-dialog {
         position: absolute;
         top: 50% !important;
@@ -50,11 +51,11 @@
         left: 0;
         right: 0;
     }
-
+    
     li.cart-item {
         float: left;
     }
-
+    
     a img {
         width: 3em;
         height: 3em;
@@ -155,10 +156,10 @@
             var type = self.attr('data-type'),
                 num = parseFloat(self.siblings('input').val())
 
-            if(type == 'add') {
+            if (type == 'add') {
                 num += 1
-            } else if(type == 'substr'){
-                if(num > 1) {
+            } else if (type == 'substr') {
+                if (num > 1) {
                     num -= 1
                 } else {
                     return false
@@ -177,13 +178,55 @@
                 var self = $(this),
                     price = self.attr('data-price'),
                     index = self.attr('data-index')
-                var quantity = $('#Q'+index).val()
+                var quantity = $('#Q' + index).val()
 
                 sum += parseFloat(price) * parseFloat(quantity)
             })
 
-            $('#sum-all').html('总价：￥' + sum + '.0')
+            $('#sum-all').html('总价：￥' + sum + '.00')
+            return sum
         }
+
+        // 结算
+        function cartAll() {
+            $('input[name="chkItem"]:checked').each(function() {
+                var self = $(this),
+                    Id = self.attr('data-id'),
+                    index = self.attr('data-index')
+                var quantity = $('#Q' + index).val()
+
+                var data = {
+                        "cId": Id,
+                        "cnum": quantity
+                    }
+                // 发送数据请求
+                $.ajax({
+                    url: '/cartall',
+                    type: 'POST',
+                    data: data,
+                    success: function(data, status) {
+                        if (status == 'success') {
+                            alert('结算成功!所支付的金额为：￥'+sumAll())
+                            location.href = "/home";
+                        } else {
+                            alert('.....')
+                            location.href = "cart";
+                        }
+                    },
+                    error: function(data, error) {
+                        alert('error!')
+                    }
+                })
+            })
+        }
+
+        $('#confirm').on('click', function(event) {
+            event.preventDefault()
+            cartAll()
+
+        })
+
+       
     })
     </script>
 </body>
