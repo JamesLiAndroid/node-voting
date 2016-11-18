@@ -112,7 +112,7 @@
                 </li>
                 <%}%>
         </ul>
-        <span>总计：￥<%var price =0; for(var i in carts) {if(!carts[i].cId) continue; price += carts[i].cPrice;}%></span>
+        <span id="sum-all"></span>
     </div>
     <div>
         <button id="confirm" name="pay" type="submit" class="btn btn-primary btn-raised" data-dismiss="modal">结算</button>
@@ -136,6 +136,8 @@
             $('input[name="chkItem"]').each(function(index, el) {
                 $(this).prop("checked", self.is(":checked"))
             });
+
+            sumAll()
         });
 
         // 设置单选
@@ -143,9 +145,11 @@
             /* Act on the event */
             var isCheck = $('input[name="chkItem"]:not(:checked)').length ? false : true
             $('#check-all').prop("checked", isCheck)
+
+            sumAll()
         });
 
-        // 添加加减
+        // 条目加减数目的显示
         $('.li-quantity a').click(function(event) {
             var self = $(this)
             var type = self.attr('data-type'),
@@ -162,7 +166,24 @@
             }
 
             self.siblings('input').val(num)
+
+            sumAll()
         });
+
+        // 计算总价
+        function sumAll() {
+            var sum = 0
+            $('input[name="chkItem"]:checked').each(function() {
+                var self = $(this),
+                    price = self.attr('data-price'),
+                    index = self.attr('data-index')
+                var quantity = $('#Q'+index).val()
+
+                sum += parseFloat(price) * parseFloat(quantity)
+            })
+
+            $('#sum-all').html('总价：￥' + sum + '.0')
+        }
     })
     </script>
 </body>
