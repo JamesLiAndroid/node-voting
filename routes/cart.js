@@ -124,4 +124,26 @@ module.exports = function(app) {
       }
     })
   })
+
+  app.get('/delFromCart/:id', function(req, res) {
+    console.log('接收删除数据的请求！')
+    var id = req.params.id
+    var Carts = global.dbHelper.getModel('cart')
+    Carts.remove({
+      '_id': id
+    }, function(error, doc) {
+      console.log('删除的数据为：'+doc)
+      if(error) {
+        console.log('删除数据失败')
+        req.session.error = '删除数据失败'
+        res.sendStatus(404)
+        return
+      }
+      if(doc > 0) {
+        console.log('删除数据成功')
+        //res.sendStatus(200)
+        res.redirect('/cart')
+      }
+    })
+  })
 }
